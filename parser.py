@@ -11,7 +11,13 @@ else:
 def main():
   output = []
   output_log = dict()
-  res_parse_logs = utils.parse_logs(LOG_FILE_LOCATION)
+
+  try:
+    res_parse_logs = utils.parse_logs(LOG_FILE_LOCATION)
+
+  except FileNotFoundError as e:
+    print(e)
+    exit(1)
 
   for index, log in enumerate(res_parse_logs):
     event = log.get('event')
