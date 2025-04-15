@@ -4,10 +4,6 @@ import matplotlib.pyplot as plt
 import argparse
 
 
-def test():
-  print("test")
-
-
 def parse_args():
     parser = argparse.ArgumentParser(description='Parser tool for AWS logs')
     parser.add_argument("-f", "--file", help="Log file location")

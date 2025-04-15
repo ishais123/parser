@@ -7,9 +7,6 @@ if args.file:
 else:
   LOG_FILE_LOCATION = 'trail.log'
 
-def check_rollback():
-  pass
-
 
 def main():
   output = []
