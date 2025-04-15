@@ -7,6 +7,8 @@ import argparse
 def test():
   print("test")
 
+def hello():
+  print("hello")
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Parser tool for AWS logs')
