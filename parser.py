@@ -7,12 +7,6 @@ if args.file:
 else:
   LOG_FILE_LOCATION = 'trail.log'
 
-def check_rollback(log):
-  event = log.get('event')
-  if "rollback" in event:
-    return True
-  else:
-    return False
 
 def main():
   output = []
