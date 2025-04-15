@@ -10,6 +10,9 @@ def test():
 def hello():
   print("hello")
 
+def add(a, b):
+  return a + b
+
 def parse_args():
     parser = argparse.ArgumentParser(description='Parser tool for AWS logs')
     parser.add_argument("-f", "--file", help="Log file location")
