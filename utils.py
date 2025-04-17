@@ -3,16 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import argparse
 
-def check_scan(log):
-    """
-    Check if a scan event is present in the log entry
-    Returns True if scan event found, False otherwise
-    """
-    if log and 'event' in log:
-        event = log.get('event')
-        if 'scan' in event.lower():
-            return True
-    return False
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Parser tool for AWS logs')
