@@ -57,8 +57,10 @@ jobs:
             Please review the changes carefully before merging.
           branch: ${{ steps.branch.outputs.branch_name }}
           base: main
-          delete-branch: true
+        #   delete-branch: true
           labels: |
             rollback
             urgent
             revert
+          commit-message: "Rollback changes via automated PR"  # Add explicit commit message
+          signoff: true  # Sign off the commit
