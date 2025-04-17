@@ -25,14 +25,17 @@ jobs:
           git config user.email "actions@github.com"
 
       - name: Create rollback branch
+        id: branch
         run: |
           BRANCH_NAME="rollback/$(date +%Y%m%d-%H%M%S)-${{ github.event.inputs.commit_hash }}"
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
           git checkout -b $BRANCH_NAME
 
       - name: Revert changes
         run: |
           git revert --no-commit ${{ github.event.inputs.commit_hash }}..HEAD
           git commit -m "Revert changes after ${{ github.event.inputs.commit_hash }}"
+          git push origin ${{ steps.branch.outputs.branch_name }}
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
