@@ -9,6 +9,7 @@ else:
 
 
 def main():
+  utils.testtt()
   output = []
   output_log = dict()
 

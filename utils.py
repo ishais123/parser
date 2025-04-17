@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import argparse
 
+def testtt():
+  print("test")
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Parser tool for AWS logs')
