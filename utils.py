@@ -3,6 +3,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import argparse
 
+def test():
+  pass
+
 def check_scan(log):
     """
     Check if a scan event is present in the log entry
