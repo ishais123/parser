@@ -18,13 +18,3 @@ pip3 install -r req.txt
 # Run Parser
 python3 parser.py -f <log file location>
 ```
-
-## Rollback Process
-If you need to rollback to a previous state after parsing:
-
-1. The parser automatically creates backup files with `.bak` extension before processing
-2. To rollback, simply rename the backup file by removing the `.bak` extension
-3. Example rollback command:
-```bash
-mv your_logfile.json.bak your_logfile.json
-```
