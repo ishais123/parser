@@ -5,7 +5,6 @@ args = utils.parse_args()
 
 if args.file:
   LOG_FILE_LOCATION = args.file
-  print(LOG_FILE_LOCATION)
 else:
   LOG_FILE_LOCATION = 'trail.log'
   print("No log file provided, using default trail.log")
