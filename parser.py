@@ -2,8 +2,6 @@ import utils
 
 args = utils.parse_args()
 
-if True:
- print("this is true")
 
 if args.file:
   LOG_FILE_LOCATION = args.file
