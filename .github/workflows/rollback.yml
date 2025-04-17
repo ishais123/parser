@@ -1,0 +1,61 @@
+name: Rollback Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_hash:
+        description: 'Commit hash to revert to'
+        required: true
+      reason:
+        description: 'Reason for rollback'
+        required: true
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Create rollback branch
+        run: |
+          BRANCH_NAME="rollback/$(date +%Y%m%d-%H%M%S)-${{ github.event.inputs.commit_hash }}"
+          git checkout -b $BRANCH_NAME
+
+      - name: Revert changes
+        run: |
+          git revert --no-commit ${{ github.event.inputs.commit_hash }}..HEAD
+          git commit -m "Revert changes after ${{ github.event.inputs.commit_hash }}"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          title: "🔄 Revert changes after ${{ github.event.inputs.commit_hash }}"
+          body: |
+            ## Revert Details
+            
+            🔙 Reverting all changes after commit: ${{ github.event.inputs.commit_hash }}
+            
+            ### Reason for Revert
+            ${{ github.event.inputs.reason }}
+            
+            ### Additional Information
+            - Triggered by: @${{ github.actor }}
+            - Workflow Run: [Link](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            - Command used: `git revert --no-commit ${{ github.event.inputs.commit_hash }}..HEAD`
+            
+            Please review the changes carefully before merging.
+          branch: rollback/$(date +%Y%m%d-%H%M%S)-${{ github.event.inputs.commit_hash }}
+          base: main
+          delete-branch: true
+          labels: |
+            rollback
+            urgent
+            revert
