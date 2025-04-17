@@ -38,6 +38,8 @@ jobs:
           git push origin ${{ steps.branch.outputs.branch_name }}
 
       - name: Create Pull Request
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           PR_BODY="## Revert Details
 
