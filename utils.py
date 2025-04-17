@@ -10,7 +10,9 @@ def parse_args():
     args = parser.parse_args()
     return args
 
-
+def parse_logss(file):
+  parsed_logs = []
+  
 def parse_logs(file):
   parsed_logs = []
   with open(file, 'r') as file:
