@@ -55,7 +55,7 @@ jobs:
             - Command used: `git revert --no-commit ${{ github.event.inputs.commit_hash }}..HEAD`
             
             Please review the changes carefully before merging.
-          branch: rollback/$(date +%Y%m%d-%H%M%S)-${{ github.event.inputs.commit_hash }}
+          branch: ${{ steps.branch.outputs.branch_name }}
           base: main
           delete-branch: true
           labels: |
