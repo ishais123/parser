@@ -38,29 +38,24 @@ jobs:
           git push origin ${{ steps.branch.outputs.branch_name }}
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          title: "🔄 Revert changes after ${{ github.event.inputs.commit_hash }}"
-          body: |
-            ## Revert Details
-            
-            🔙 Reverting all changes after commit: ${{ github.event.inputs.commit_hash }}
-            
-            ### Reason for Revert
-            ${{ github.event.inputs.reason }}
-            
-            ### Additional Information
-            - Triggered by: @${{ github.actor }}
-            - Workflow Run: [Link](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-            - Command used: `git revert --no-commit ${{ github.event.inputs.commit_hash }}..HEAD`
-            
-            Please review the changes carefully before merging.
-          branch: ${{ steps.branch.outputs.branch_name }}
-          base: main
-        #   delete-branch: true
-          labels: |
-            rollback
-            urgent
-            revert
-          commit-message: "Rollback changes via automated PR"  # Add explicit commit message
-          signoff: true  # Sign off the commit
+        run: |
+          PR_BODY="## Revert Details
+
+          🔙 Reverting all changes after commit: ${{ github.event.inputs.commit_hash }}
+
+          ### Reason for Revert
+          ${{ github.event.inputs.reason }}
+
+          ### Additional Information
+          - Triggered by: @${{ github.actor }}
+          - Workflow Run: [Link](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          - Command used: \`git revert --no-commit ${{ github.event.inputs.commit_hash }}..HEAD\`
+
+          Please review the changes carefully before merging."
+
+          gh pr create \
+            --title "🔄 Revert changes after ${{ github.event.inputs.commit_hash }}" \
+            --body "$PR_BODY" \
+            --base main \
+            --head ${{ steps.branch.outputs.branch_name }} \
+            --label "rollback,urgent,revert"
