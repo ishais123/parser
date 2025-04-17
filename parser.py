@@ -6,10 +6,9 @@ if args.file:
   LOG_FILE_LOCATION = args.file
 else:
   LOG_FILE_LOCATION = 'trail.log'
-  print("No file provided, using default file: trail.log")
+
 
 def main():
-  utils.testtt()
   output = []
   output_log = dict()
 
