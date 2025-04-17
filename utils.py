@@ -30,6 +30,8 @@ def parse_logs(file):
         parsed_logs.append(d)
     return parsed_logs
 
+def hey():
+   pass
 
 def parse_datetime(datetime):
   if len(datetime.split(' ')) >= 2:
